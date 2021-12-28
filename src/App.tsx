@@ -1,12 +1,11 @@
 import React, { FC } from 'react';
 import './App.css';
-import { Navbar } from './components/Navbar/Navbar';
-import Test from './components/Test';
+import Layout from './components/Layout/Layout';
 
 const App: FC = () => {
   return (
     <div className="App">
-      <Navbar />
+      <Layout />
     </div>
   );
 }

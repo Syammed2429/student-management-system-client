@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Container, Flex } from '@chakra-ui/react'
-
+import { Link } from 'react-router-dom'
 
 const Navbar: FC = () => {
     return (
@@ -9,10 +9,17 @@ const Navbar: FC = () => {
                 <Flex
                     justify='center'
                     gap='5%'
+                    color='#81E6D9'
                 >
+                    <Link to="">
+                        <h3>Student</h3>
+                    </Link>
 
-                    <h3>Admin</h3>
-                    <h3>Student</h3>
+                    <Link to="/admin">
+                        <h3>Admin</h3>
+                    </Link>
+
+
                 </Flex>
             </Container>
 
