@@ -17,19 +17,12 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     const login = (email, password) => {
-        // return auth.signInWithEmailAndPassword()
         return auth.signInWithEmailAndPassword(email, password)
-        // .catch(function (error) {
-        //     // Handle Errors here.
-        //     var errorCode = error.code;
-        //     var errorMessage = error.message;
-        //     if (errorCode === 'auth/wrong-password') {
-        //         return alert('Wrong password.');
-        //     } else {
-        //         return alert(errorMessage);
-        //     }
-        // })
 
+    }
+
+    const logout = () => {
+        return auth.signOut();
     }
 
     React.useEffect(() => {
@@ -45,7 +38,8 @@ export const AuthContextProvider = ({ children }) => {
         value={{
             currentUser,
             signUp,
-            login
+            login,
+            logout
         }}>
         {children}
     </AuthContext.Provider>

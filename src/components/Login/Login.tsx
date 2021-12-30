@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from 'react'
 import { Container, Flex } from '@chakra-ui/react'
 import { useAuth } from '../../contexts/AuthContext'
-
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -10,7 +10,7 @@ const Login: FC = () => {
     const passwordRef: any = useRef()
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean>(false)
-
+    const navigate = useNavigate()
     const { login } = useAuth()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -20,7 +20,7 @@ const Login: FC = () => {
             setError(null)
             setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value)
-
+            navigate('/admin')
         } catch {
             setError('Failed to sign In')
         }
