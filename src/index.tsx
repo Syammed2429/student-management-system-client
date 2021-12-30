@@ -4,7 +4,6 @@ import App from './App';
 import { ChakraProvider } from '@chakra-ui/react'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthContextProvider } from './contexts/AuthContext';
-// import 
 
 
 ReactDOM.render(

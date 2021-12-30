@@ -4,27 +4,25 @@ import { useAuth } from '../../contexts/AuthContext'
 
 
 
-const SignUp: FC = () => {
+
+const Login: FC = () => {
     const emailRef: any = useRef()
     const passwordRef: any = useRef()
-    const confirmPasswordRef: any = useRef()
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean>(false)
 
-    const { signUp, currentUser } = useAuth()
+    const { login } = useAuth()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        if (passwordRef.current.value !== confirmPasswordRef.current.value) return setError('Password Does not match')
         try {
             setError(null)
             setLoading(true)
-            await signUp(emailRef.current.value, passwordRef.current.value)
+            await login(emailRef.current.value, passwordRef.current.value)
 
-        } catch (err) {
-            console.log('err:', err)
-            setError('Failed to sign up')
+        } catch {
+            setError('Failed to sign In')
         }
         setLoading(false)
 
@@ -38,8 +36,7 @@ const SignUp: FC = () => {
                 <Flex direction="column">
 
                     <div >
-                        <h2>Sign Up</h2>
-                        {currentUser && currentUser.email}
+                        <h2 style={{ color: 'white' }}>Sign In</h2>
 
                         <form onSubmit={handleSubmit}>
                             <label htmlFor="email">
@@ -50,11 +47,9 @@ const SignUp: FC = () => {
                                 <input type="password" id="password" ref={passwordRef} placeholder="Enter your password" />
                             </label>
 
-                            <label htmlFor="confirm-password">
-                                <input type="password" id="confirm-password" ref={confirmPasswordRef} placeholder="Enter your confirm-password" />
-                            </label>
 
-                            <input disabled={loading} type="submit" value='Register' />
+
+                            <input disabled={loading} type="submit" value='Login' />
 
                         </form>
                         <div style={{ color: 'red' }}>{error}</div>
@@ -66,4 +61,4 @@ const SignUp: FC = () => {
     )
 }
 
-export { SignUp }
+export { Login }
