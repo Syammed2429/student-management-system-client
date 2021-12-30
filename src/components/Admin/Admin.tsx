@@ -65,12 +65,12 @@ const Admin: FC = () => {
                             >
                                 <Link to="/admin/new-student" ><MenuItem>Add New Student</MenuItem></Link>
                                 <MenuItem onClick={() => alert('Kagebunshin')}>Add Contests</MenuItem>
+                                <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
                             </MenuList>
                         </>
                     )}
                 </Menu>
             </Flex>
-            <Button colorScheme='primary' onClick={handleLogOut}>Log Out</Button>
         </>
     )
 }
