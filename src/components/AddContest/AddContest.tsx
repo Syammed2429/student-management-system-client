@@ -24,7 +24,7 @@ import { AdminMenu } from '../AdminMenu/AdminMenu'
 
 
 
-const AddNewStudents: FC = () => {
+const AddContest: FC = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef: any = React.useRef()
 
@@ -32,13 +32,13 @@ const AddNewStudents: FC = () => {
 
 
 
+
     const [formData, setFormData] = useState({
-        studentName: '',
-        city: '',
-        age: '',
-        education: '',
-        gender: '',
-        contact: '',
+        contestTitle: '',
+        type: '',
+        deadline: '',
+        tags: '',
+        time: '',
     })
 
     const [formDetails, setFormDetails] = useState<any>([])
@@ -55,13 +55,12 @@ const AddNewStudents: FC = () => {
     const addNewStudent = async (datas: any) => {
         try {
 
-            const data = await axios.post(`${Link}/student`, {
-                name: datas.studentName,
-                city: datas.city,
-                age: datas.age,
-                education: datas.education,
-                gender: datas.gender,
-                contact: datas.contact,
+            const data = await axios.post(`${Link}/contest`, {
+                title: datas.contestTitle,
+                type: datas.type,
+                deadline: datas.deadline,
+                tags: datas.tags,
+                time: datas.time,
             })
 
             if (data.status === 201) {
@@ -83,12 +82,11 @@ const AddNewStudents: FC = () => {
 
     const handleSubmit = () => {
         setFormDetails([...formDetails, formData])
-        if (formData.age.length === 0 ||
-            formData.city.length === 0 ||
-            formData.contact.length === 0 ||
-            formData.education.length === 0 ||
-            formData.gender.length === 0 ||
-            formData.studentName.length === 0) {
+        if (formData.contestTitle.length === 0 ||
+            formData.deadline.length === 0 ||
+            formData.tags.length === 0 ||
+            formData.time.length === 0 ||
+            formData.type.length === 0) {
             onOpen()
             return setSuccess(false)
 
@@ -107,108 +105,95 @@ const AddNewStudents: FC = () => {
 
 
             <AdminMenu />
-            <h2>AddNewStudents</h2>
+            <h2>AddContest</h2>
 
 
             <Container>
 
                 <FormControl >
 
-                    <FormLabel htmlFor='name'>Student Name</FormLabel>
+                    <FormLabel htmlFor='title'>Contest Title</FormLabel>
                     <Input
-                        id='name'
+                        id='title'
                         type='text'
-                        name='studentName'
+                        name='contestTitle'
                         onChange={handleInputChange}
                     />
-                    {!formData.studentName ? (
+                    {!formData.contestTitle ? (
                         <FormHelperText display='flex'>
-                            Enter the student name.
+                            Enter the contest title.
                         </FormHelperText>
                     ) : (
-                        <FormHelperText display='flex'>Name is required.</FormHelperText>
+                        <FormHelperText display='flex'>Title is required.</FormHelperText>
                     )}
 
 
-                    <FormLabel htmlFor='city'>City</FormLabel>
+                    <FormLabel htmlFor='type'>Contest Type</FormLabel>
                     <Input
-                        id='city'
-                        name='city'
+                        id='type'
+                        name='type'
                         type='text'
                         onChange={handleInputChange}
                     />
-                    {formData.city ? (
+                    {formData.type ? (
                         <FormHelperText display='flex'>
-                            Enter the city.
+                            Enter the type.
                         </FormHelperText>
                     ) : (
-                        <FormHelperText display='flex'>City is required.</FormHelperText>
+                        <FormHelperText display='flex'>Type is required.</FormHelperText>
                     )}
 
 
-                    <FormLabel htmlFor='age'>age</FormLabel>
+                    <FormLabel htmlFor='deadline'>Deadline</FormLabel>
                     <Input
-                        id='age'
-                        type='number'
-                        name='age'
+                        id='deadline'
+                        type='text'
+                        name='deadline'
                         max={50} min={10}
                         onChange={handleInputChange}
                     />
-                    {!formData.age ? (
+                    {!formData.deadline ? (
                         <FormHelperText display='flex'>
-                            Enter the age.
+                            Enter the deadline.
                         </FormHelperText>
                     ) :
-                        <FormHelperText display='flex' >Age is required.</FormHelperText>
+                        <FormHelperText display='flex' >Deadline is required.</FormHelperText>
                     }
 
 
-                    <FormLabel htmlFor='education'>Education</FormLabel>
+                    <FormLabel htmlFor='tags'>Tags</FormLabel>
                     <Input
-                        id='education'
-                        name='education'
+                        id='tags'
+                        name='tags'
                         type='text'
                         pattern='[a-zA-Z]{9}'
                         onChange={handleInputChange}
                     />
-                    {!formData.education ? (
+                    {!formData.tags ? (
                         <FormHelperText display='flex'>
-                            Enter the Education.
+                            Enter the tags.
                         </FormHelperText>
                     ) : (
-                        <FormHelperText display='flex'>Education is required.</FormHelperText>
+                        <FormHelperText display='flex'>Tags is required.</FormHelperText>
                     )}
 
 
-                    <FormLabel htmlFor='gender'>gender</FormLabel>
+                    <FormLabel htmlFor='time'>Time</FormLabel>
                     <Input
-                        id='gender'
-                        name='gender'
+                        id='time'
+                        name='time'
                         type='text'
                         onChange={handleInputChange}
                     />
-                    {!formData.gender ? (
+                    {!formData.time ? (
                         <FormHelperText display='flex'>
-                            Enter the Gender.
+                            Enter the time.
                         </FormHelperText>
                     ) : (
-                        <FormHelperText display='flex'>Gender is required.</FormHelperText>
+                        <FormHelperText display='flex'>Time is required.</FormHelperText>
                     )}
 
-                    <FormLabel htmlFor='contact'>Contact</FormLabel>
-                    <Input
-                        id='contact'
-                        name='contact'
-                        type='text'
-                        onChange={handleInputChange}
-                    />
-                    {!formData.contact ? (
-                        <FormHelperText display='flex'>
-                            Enter the Contact Number.
-                        </FormHelperText>
-                    ) : (
-                        <FormHelperText display='flex'>Contact Number is required.</FormHelperText>
-                    )}
+
 
 
                     <Button
@@ -256,4 +241,4 @@ const AddNewStudents: FC = () => {
     )
 }
 
-export { AddNewStudents }
+export { AddContest }

@@ -1,63 +1,47 @@
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import {
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    Flex,
-    // MenuItemOption,
-    // MenuGroup,
-    // MenuOptionGroup,
-    // MenuDivider,
-    Button,
     Text,
-    Container,
-    Table,
-    Thead,
-    Th,
-    Tr,
-    Tbody,
-    Td
 } from '@chakra-ui/react'
-import { FiChevronDown } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
-import { useNavigate, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { StudentsData } from './StudentsData'
+import { AdminMenu } from '../AdminMenu/AdminMenu'
 
 
 
 
 //Main FFunction Starts
 const Admin: FC = () => {
-    const { currentUser, logout } = useAuth()
-    const [error, setError] = useState<string | null>(null)
+    const { currentUser } = useAuth()
     const [studentsData, setStudentsData] = useState<any>([])
-
+    const [loading, setLoading] = useState<boolean>(false)
     // const [keys, setKeys] = useState<any>([]])
-    const navigate = useNavigate()
+    const [error, setError] = useState<string | null>(null)
 
 
-    const handleLogOut = async () => {
-        setError(null)
-        try {
-            await logout()
-            navigate('/login')
 
-        } catch {
-            setError('Failed to log out')
-        }
-    }
-
+    const Link = process.env.REACT_APP_BACKEND
 
     useEffect(() => {
+
         const getStudents = async () => {
-            const response = await fetch(`https://student-management-production.up.railway.app/student`);
-            const result = await response.json();
-            setStudentsData(result)
+            try {
+                setLoading(true)
+
+                const response = await fetch(`${Link}/student`);
+                const result = await response.json();
+                setStudentsData(result)
+            } catch {
+                setError('Failed to sign up')
+
+                setLoading(true)
+            }
+
 
         }
+
         getStudents()
+        setLoading(false)
     }, [studentsData])
 
 
@@ -67,39 +51,16 @@ const Admin: FC = () => {
 
     return !currentUser ? <Navigate to="/login" /> : (
         <>
+
             <h1>Admin</h1>
+            <AdminMenu />
             <Text>Welcome {currentUser.email}</Text>
-            <Text color="red">{error}</Text>
-            <Flex
-                justify='end'
-                mx='5%'
+            {loading ?
+                <Text>Loading...</Text> :
 
-            >
+                <StudentsData studentsData={studentsData} />
+            }
 
-                <Menu>
-                    {({ isOpen }) => (
-                        <>
-
-                            <MenuButton
-                                colorScheme='blue'
-
-                                isActive={isOpen} as={Button} rightIcon={<FiChevronDown />}>
-                                {isOpen ? 'Close' : 'Admin Menu'}
-                            </MenuButton>
-                            <MenuList
-                                bg='primary'
-
-
-                            >
-                                <Link to="/admin/new-student" ><MenuItem>Add New Student</MenuItem></Link>
-                                <MenuItem onClick={() => alert('Kagebunshin')}>Add Contests</MenuItem>
-                                <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
-                            </MenuList>
-                        </>
-                    )}
-                </Menu>
-            </Flex>
-            <StudentsData studentsData={studentsData} />
 
 
         </>

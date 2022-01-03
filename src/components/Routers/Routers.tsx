@@ -1,6 +1,7 @@
 //Importing the package requires
 import React, { FC } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { AddContest } from '../AddContest/AddContest'
 import { AddNewStudents } from '../Admin/AddNewStudents'
 import { Admin } from '../Admin/Admin'
 import { Login } from '../Login/Login'
@@ -17,6 +18,7 @@ const Routers: FC = () => {
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/admin/new-student" element={<AddNewStudents />} />
+                <Route path="/admin/add-contest" element={<AddContest />} />
                 <Route path="*" element={
                     <>
                         <h1>404 Not Found</h1>
