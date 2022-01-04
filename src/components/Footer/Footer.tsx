@@ -1,6 +1,5 @@
 import { Box, Text } from '@chakra-ui/react'
 import { FC } from 'react'
-import './footer.css'
 
 const Footer: FC = () => {
     return (
