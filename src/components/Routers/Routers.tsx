@@ -1,5 +1,5 @@
 //Importing the package requires
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { AddContest } from '../AddContest/AddContest'
 import { AddNewStudents } from '../Admin/AddNewStudents'
