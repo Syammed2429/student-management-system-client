@@ -9,6 +9,7 @@ import {
     Tbody,
     Td,
     Button,
+    Flex,
 
 } from '@chakra-ui/react'
 import { useState } from 'react'
@@ -58,8 +59,11 @@ const ShowContests = ({ contestsData }: any) => {
     return (
         <>
             <Container >
-                <Button onClick={dsaSort} colorScheme="pink">DSA</Button>
-                <Button onClick={codingSort} colorScheme="pink">Coding</Button>
+                <Flex justify='center'>
+
+                    <Button mx='2' onClick={dsaSort} colorScheme="pink">DSA</Button>
+                    <Button mx='2' onClick={codingSort} colorScheme="pink">Coding</Button>
+                </Flex>
 
 
                 <Table size='md' >

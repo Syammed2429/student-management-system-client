@@ -18,6 +18,9 @@ import {
 } from '@chakra-ui/react'
 import axios from 'axios'
 import { AdminMenu } from '../AdminMenu/AdminMenu'
+import { useAuth } from '../../contexts/AuthContext'
+import { Navigate } from 'react-router-dom'
+
 
 
 
@@ -25,6 +28,8 @@ import { AdminMenu } from '../AdminMenu/AdminMenu'
 
 
 const AddNewStudents: FC = () => {
+    const { currentUser } = useAuth()
+
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef: any = React.useRef()
 
@@ -102,12 +107,12 @@ const AddNewStudents: FC = () => {
 
 
 
-    return (
+    return !currentUser ? <Navigate to="/login" /> : (
         <>
 
 
             <AdminMenu />
-            <h2>AddNewStudents</h2>
+            <h2>Add New Students</h2>
 
 
             <Container>

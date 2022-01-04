@@ -18,6 +18,10 @@ import {
 } from '@chakra-ui/react'
 import axios from 'axios'
 import { AdminMenu } from '../AdminMenu/AdminMenu'
+import { useAuth } from '../../contexts/AuthContext'
+import { Navigate } from 'react-router-dom'
+
+
 
 
 
@@ -25,14 +29,11 @@ import { AdminMenu } from '../AdminMenu/AdminMenu'
 
 
 const AddContest: FC = () => {
+
+    //Hooks
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef: any = React.useRef()
-
-    const Link = process.env.REACT_APP_BACKEND
-
-
-
-
+    const { currentUser } = useAuth()
     const [formData, setFormData] = useState({
         contestTitle: '',
         type: '',
@@ -43,6 +44,14 @@ const AddContest: FC = () => {
 
     const [formDetails, setFormDetails] = useState<any>([])
     const [success, setSuccess] = useState<boolean>(false)
+
+
+    //Backend Link
+    const Link = process.env.REACT_APP_BACKEND
+
+
+
+
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -100,12 +109,12 @@ const AddContest: FC = () => {
 
 
 
-    return (
+    return !currentUser ? <Navigate to="/login" /> : (
         <>
 
 
             <AdminMenu />
-            <h2>AddContest</h2>
+            <h2>Add Contest</h2>
 
 
             <Container>
@@ -222,9 +231,9 @@ const AddContest: FC = () => {
                         <AlertDialogCloseButton />
                         <AlertDialogBody>
                             {success ?
-                                <Text>Successfully New Student is created</Text>
+                                <Text>New contest is Successfully added</Text>
                                 :
-                                <Text>Student is already created or your input fields are empty</Text>}
+                                <Text>Contest is already existed or your input fields are empty</Text>}
                         </AlertDialogBody>
                         <AlertDialogFooter>
                             <Button colorScheme='red' ref={cancelRef} onClick={onClose}>

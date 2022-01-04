@@ -24,7 +24,6 @@ const Student: FC = () => {
             setContestsData(data.contests)
 
         }
-        // dsaSort()
 
         getContests()
     }, [pages, contestsData, Link,])
@@ -34,10 +33,10 @@ const Student: FC = () => {
 
     return (
         <>
-            <h1>Student</h1>
+            <h1>Welcome to the contets</h1>
 
             <ShowContests contestsData={contestsData} />
-            <Flex justify="center" >
+            <Flex justify="space-around" my='5' >
                 <Button
                     disabled={pages === 1}
                     colorScheme='yellow'

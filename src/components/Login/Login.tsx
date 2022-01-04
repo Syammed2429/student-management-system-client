@@ -1,5 +1,5 @@
 import { FC, useRef, useState } from 'react'
-import { Container, Flex } from '@chakra-ui/react'
+import { Button, Center, Container, Flex, FormControl, FormLabel, Input } from '@chakra-ui/react'
 import { useAuth } from '../../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
@@ -22,7 +22,7 @@ const Login: FC = () => {
             await login(emailRef.current.value, passwordRef.current.value)
             navigate('/admin')
         } catch {
-            setError('Failed to sign In')
+            setError('Failed to Log In check your password and email')
         }
         setLoading(false)
 
@@ -35,22 +35,33 @@ const Login: FC = () => {
             <Container color="black">
                 <Flex direction="column">
 
+
                     <div >
                         <h2 style={{ color: 'white' }}>Sign In</h2>
 
                         <form onSubmit={handleSubmit}>
-                            <label htmlFor="email">
-                                <input type="text" id="email" ref={emailRef} placeholder="Enter your email" />
-                            </label>
+                            <Center>
 
-                            <label htmlFor="password">
-                                <input type="password" id="password" ref={passwordRef} placeholder="Enter your password" />
-                            </label>
+                                <FormControl color='white' width='80%'>
+
+                                    <FormLabel htmlFor="email">
+                                        <Input type="text" id="email" ref={emailRef} placeholder="Enter your email" />
+                                    </FormLabel>
+
+                                    <FormLabel htmlFor="password">
+                                        <Input type="password" id="password" ref={passwordRef} placeholder="Enter your password" />
+                                    </FormLabel>
 
 
+                                    <Button
+                                        colorScheme='green'
+                                        p='5'
+                                        disabled={loading}
+                                        type="submit"
+                                        value='Login'>Log In</Button>
 
-                            <input disabled={loading} type="submit" value='Login' />
-
+                                </FormControl>
+                            </Center>
                         </form>
                         <div style={{ color: 'red' }}>{error}</div>
                     </div>
