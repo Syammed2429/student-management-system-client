@@ -9,6 +9,7 @@ import { Login } from '../Login/Login'
 import { Navbar } from '../Navbar/Navbar'
 import { Student } from '../Student/Student'
 import errorMsg from '../../assests/images/404.svg'
+import { Footer } from '../Footer/Footer'
 
 
 
@@ -31,6 +32,7 @@ const Routers: FC = () => {
                     </>
                 } />
             </Routes>
+            <Footer />
 
         </>
     )
