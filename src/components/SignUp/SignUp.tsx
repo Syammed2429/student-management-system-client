@@ -23,7 +23,6 @@ const SignUp: FC = () => {
             await signUp(emailRef.current.value, passwordRef.current.value)
 
         } catch (err) {
-            console.log('err:', err)
             setError('Failed to sign up')
         }
         setLoading(false)

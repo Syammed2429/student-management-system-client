@@ -16,7 +16,7 @@ const Admin: FC = () => {
     const [studentsData, setStudentsData] = useState<any>([])
     const [loading, setLoading] = useState<boolean>(false)
     // const [keys, setKeys] = useState<any>([]])
-    const [error, setError] = useState<string | null>(null)
+    // const [error, setError] = useState<string | null>(null)
 
 
 
@@ -32,7 +32,7 @@ const Admin: FC = () => {
                 const result = await response.json();
                 setStudentsData(result)
             } catch {
-                setError('Failed to sign up')
+                // setError('Failed to sign up')
 
                 setLoading(true)
             }
@@ -42,7 +42,7 @@ const Admin: FC = () => {
 
         getStudents()
         setLoading(false)
-    }, [studentsData])
+    }, [Link, studentsData])
 
 
 
