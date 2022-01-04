@@ -1,4 +1,5 @@
 //Importing the package requires
+import { Container, Img } from '@chakra-ui/react'
 import { FC } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { AddContest } from '../AddContest/AddContest'
@@ -7,6 +8,8 @@ import { Admin } from '../Admin/Admin'
 import { Login } from '../Login/Login'
 import { Navbar } from '../Navbar/Navbar'
 import { Student } from '../Student/Student'
+import errorMsg from '../../assests/images/404.svg'
+
 
 
 const Routers: FC = () => {
@@ -21,7 +24,10 @@ const Routers: FC = () => {
                 <Route path="/admin/add-contest" element={<AddContest />} />
                 <Route path="*" element={
                     <>
-                        <h1>404 Not Found</h1>
+                        <Container>
+
+                            <Img src={errorMsg} />
+                        </Container>
                     </>
                 } />
             </Routes>
