@@ -7,7 +7,7 @@ const Footer: FC = () => {
             <Box position="absolute" bottom='0' left='0' w='100%'>
 
 
-                <Text>Made With ♥️ By <a href="https://github.com/kerrybli">Dada Khalandar</a></Text>
+                <Text fontSize='xl'>Made With ♥️ By <a href="https://github.com/kerrybli">Dada Khalandar</a></Text>
             </Box >
         </>
     )
