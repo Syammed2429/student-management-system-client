@@ -4,54 +4,63 @@ import {
     Container,
     Table,
     Thead,
-    Text,
     Tr,
     Th,
     Tbody,
     Td,
     Button,
-    AlertDialog,
-    AlertDialogBody,
-    AlertDialogCloseButton,
-    AlertDialogContent,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogOverlay,
-    useDisclosure,
-} from '@chakra-ui/react'
-import React, { useState } from 'react'
-import axios from 'axios'
 
+} from '@chakra-ui/react'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 const ShowContests = ({ contestsData }: any) => {
 
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const cancelRef: any = React.useRef()
-    const [success, setSuccess] = useState<boolean>(false)
-
-    const Link = process.env.REACT_APP_BACKEND
+    const [contestsDatas, setContestsDatas] = useState<string[]>([]);
+    const [dsa, setDsa] = useState<boolean>(false)
+    const [coding, setCoding] = useState<boolean>(false)
 
 
+    useEffect(() => {
+        if (!dsa && !coding) {
 
-    // const handleDelete = async (id: string) => {
-    //     const data = await axios.delete(`${Link}/student/${id}`)
-    //     if (data.status === 200) {
-    //         onOpen()
-    //         setSuccess(true)
-    //     } else {
-    //         setSuccess(false)
-    //         onOpen()
+            setContestsDatas(contestsData)
+        }
+    }, [coding, contestsData, dsa]);
 
-    //         return
-    //     }
-    // }
 
+    const dsaSort = () => {
+
+        const data = contestsData.filter((e: any) => {
+            return e.type === 'DSA'
+        })
+
+        setDsa(true)
+        setContestsDatas(data)
+
+    }
+
+    const codingSort = async () => {
+
+        const datas = contestsData.filter((e: any) => {
+            return e.type === 'Coding'
+        })
+
+
+        setCoding(true)
+        setContestsDatas(datas)
+
+
+
+    }
 
 
     return (
         <>
             <Container >
-                {/* <Center> */}
+                <Button onClick={dsaSort} colorScheme="pink">DSA</Button>
+                <Button onClick={codingSort} colorScheme="pink">Coding</Button>
+
 
                 <Table size='md' >
 
@@ -67,7 +76,7 @@ const ShowContests = ({ contestsData }: any) => {
                     </Thead>
 
 
-                    {contestsData.map((e: any) => (
+                    {contestsDatas.map((e: any) => (
 
                         <Tbody key={e._id} >
                             <Tr >
@@ -77,47 +86,14 @@ const ShowContests = ({ contestsData }: any) => {
                                 <Td fontSize="19px">{e.deadline} </Td>
                                 <Td fontSize="19px">{e.tags} </Td>
                                 <Td fontSize="19px">{e.time} </Td>
-                                {/* <Td>
-                                    <Button onClick={() => {
-                                        handleDelete(e._id)
-                                    }} colorScheme='red'>Delete</Button>
 
-                                </Td> */}
                             </Tr>
 
                         </Tbody>
                     ))}
 
                 </Table>
-                {/* </Center> */}
 
-
-                <AlertDialog
-                    motionPreset='slideInBottom'
-                    leastDestructiveRef={cancelRef}
-                    onClose={onClose}
-                    isOpen={isOpen}
-                    isCentered
-                >
-                    <AlertDialogOverlay />
-
-                    <AlertDialogContent>
-                        <AlertDialogHeader>{success ? <Text>Success</Text> : <Text>Error</Text>}</AlertDialogHeader>
-                        <AlertDialogCloseButton />
-                        <AlertDialogBody>
-                            {success ?
-                                <Text>Successfully Deleted</Text>
-                                :
-                                <Text>Something Went wrong</Text>}
-                        </AlertDialogBody>
-                        <AlertDialogFooter>
-                            <Button colorScheme='red' ref={cancelRef} onClick={onClose}>
-                                Ok
-                            </Button>
-
-                        </AlertDialogFooter>
-                    </AlertDialogContent>
-                </AlertDialog>
 
             </Container>
 

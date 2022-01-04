@@ -24,9 +24,10 @@ const Student: FC = () => {
             setContestsData(data.contests)
 
         }
+        // dsaSort()
 
         getContests()
-    }, [pages, contestsData, Link])
+    }, [pages, contestsData, Link,])
 
 
 
